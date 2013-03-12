@@ -85,6 +85,10 @@ static NSString * const SGKeychainErrorDomain = @"com.secondgear.sgkeychain";
         }
         return nil;
     }
+    if (result)
+    {
+        CFRelease(result);
+    }
     
     NSMutableDictionary *passwordQuery = [attributesQuery mutableCopy];
     [passwordQuery setObject:(id)kCFBooleanTrue forKey:(__bridge id)kSecReturnData];
