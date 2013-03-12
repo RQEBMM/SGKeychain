@@ -21,6 +21,28 @@
 @synthesize service;
 @synthesize expectedPassword;
 
+// Thanks to David H
+// http://stackoverflow.com/questions/11726672/access-app-identifier-prefix-programmatically
+- (NSString *)bundleSeedID {
+    NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
+                           (__bridge id)kSecClassGenericPassword, kSecClass,
+                           @"bundleSeedID", kSecAttrAccount,
+                           @"", kSecAttrService,
+                           (id)kCFBooleanTrue, kSecReturnAttributes,
+                           nil];
+    CFDictionaryRef result = nil;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status == errSecItemNotFound)
+        status = SecItemAdd((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status != errSecSuccess)
+        return nil;
+    NSString *accessGroup = [(__bridge NSDictionary *)result objectForKey:(__bridge id)kSecAttrAccessGroup];
+    NSArray *components = [accessGroup componentsSeparatedByString:@"."];
+    NSString *bundleSeedID = [[components objectEnumerator] nextObject];
+    CFRelease(result);
+    return bundleSeedID;
+}
+
 - (void)setUp
 {
     [super setUp];
@@ -82,15 +104,18 @@
 
 - (void)testPasswordsAreSuccessfullyFetchedFromSameAccessGroup
 {
-    NSString *accessGroup = @"com.secondgear";
-    
+    NSString *accessGroup = [[self bundleSeedID] stringByAppendingString:@".shared"];
+
+    NSError *error;
+
     // Add a password for justin and justinw to the access group
     NSString *firstpassword = @"firstpassword";
-    [SGKeychain setPassword:firstpassword username:self.username serviceName:self.service accessGroup:accessGroup updateExisting:NO error:nil];
+    STAssertTrue([SGKeychain setPassword:firstpassword username:self.username serviceName:self.service accessGroup:accessGroup updateExisting:NO error:&error],
+                 @"Could not set first password: %@", error);
 
     NSString *secondpassword = @"secondpassword";
-    [SGKeychain setPassword:secondpassword username:@"justinw" serviceName:self.service accessGroup:accessGroup updateExisting:NO error:nil];
-    
+    STAssertTrue([SGKeychain setPassword:secondpassword username:@"justinw" serviceName:self.service accessGroup:accessGroup updateExisting:NO error:&error],
+                 @"Could not set second password: %@", error);
     
     // Ensure that the passwords can be retrieved
     NSString *password1 = [SGKeychain passwordForUsername:self.username serviceName:self.service accessGroup:accessGroup error:nil];

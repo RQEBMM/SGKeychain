@@ -55,10 +55,11 @@
 		D0AA694C152FA73F0076DED1 /* SGKeychainExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SGKeychainExampleTests-Info.plist"; sourceTree = "<group>"; };
 		D0AA694E152FA73F0076DED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D0AA6950152FA73F0076DED1 /* SGKeychainExampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGKeychainExampleTests.h; sourceTree = "<group>"; };
-		D0AA6951152FA73F0076DED1 /* SGKeychainExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGKeychainExampleTests.m; sourceTree = "<group>"; };
+		D0AA6951152FA73F0076DED1 /* SGKeychainExampleTests.m */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = SGKeychainExampleTests.m; sourceTree = "<group>"; tabWidth = 4; };
 		D0AA6961152FA76F0076DED1 /* SGKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGKeychain.h; path = ../SGKeychain.h; sourceTree = "<group>"; };
-		D0AA6962152FA76F0076DED1 /* SGKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGKeychain.m; path = ../SGKeychain.m; sourceTree = "<group>"; };
+		D0AA6962152FA76F0076DED1 /* SGKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; name = SGKeychain.m; path = ../SGKeychain.m; sourceTree = "<group>"; tabWidth = 4; };
 		D0AA6966152FAA1C0076DED1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FB86194416ED0630002311C2 /* SGKeychainExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SGKeychainExample.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +98,9 @@
 				D0AA6925152FA73E0076DED1 /* Frameworks */,
 				D0AA6923152FA73E0076DED1 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		D0AA6923152FA73E0076DED1 /* Products */ = {
 			isa = PBXGroup;
@@ -123,6 +126,7 @@
 		D0AA692C152FA73E0076DED1 /* SGKeychainExample */ = {
 			isa = PBXGroup;
 			children = (
+				FB86194416ED0630002311C2 /* SGKeychainExample.entitlements */,
 				D0AA6935152FA73F0076DED1 /* SGAppDelegate.h */,
 				D0AA6936152FA73F0076DED1 /* SGAppDelegate.m */,
 				D0AA6938152FA73F0076DED1 /* MainStoryboard.storyboard */,
@@ -373,12 +377,13 @@
 		D0AA6956152FA73F0076DED1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Justin Williams (Z96PC63GR8)";
+				CODE_SIGN_ENTITLEMENTS = SGKeychainExample/SGKeychainExample.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SGKeychainExample/SGKeychainExample-Prefix.pch";
 				INFOPLIST_FILE = "SGKeychainExample/SGKeychainExample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "17B1EE22-0384-47EC-A07F-C79146A537E1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -386,6 +391,7 @@
 		D0AA6957152FA73F0076DED1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SGKeychainExample/SGKeychainExample.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SGKeychainExample/SGKeychainExample-Prefix.pch";
 				INFOPLIST_FILE = "SGKeychainExample/SGKeychainExample-Info.plist";
