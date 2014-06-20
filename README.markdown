@@ -40,6 +40,3 @@ All The Other Stuff
 
 Please report bugs, feature requests and whatnot using Github Issues and (even better) a pull request.
 
----------------------------------------
-
-* **1.0** Original release
