@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Second Gear. All rights reserved.
 //
 
+#import <SGKeychain/SGKeychain.h>
 #import "SGKeychainExampleTests.h"
-#import "SGKeychain.h"
 
 @interface SGKeychainExampleTests ()
 @property (nonatomic, copy) NSString *username;

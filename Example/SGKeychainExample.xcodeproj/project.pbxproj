@@ -7,24 +7,75 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D0AA6927152FA73E0076DED1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AA6926152FA73E0076DED1 /* UIKit.framework */; };
-		D0AA6929152FA73E0076DED1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AA6928152FA73E0076DED1 /* Foundation.framework */; };
-		D0AA692B152FA73E0076DED1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AA692A152FA73E0076DED1 /* CoreGraphics.framework */; };
+		8B018A0ED98A4E2E8A774639 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 158DA155D6BC497A81C9EDE5 /* libPods.a */; };
+		D08628441954A40600BCFC72 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D08628431954A40600BCFC72 /* Default-568h@2x.png */; };
 		D0AA6931152FA73E0076DED1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0AA692F152FA73E0076DED1 /* InfoPlist.strings */; };
 		D0AA6933152FA73F0076DED1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA6932152FA73F0076DED1 /* main.m */; };
 		D0AA6937152FA73F0076DED1 /* SGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA6936152FA73F0076DED1 /* SGAppDelegate.m */; };
 		D0AA693A152FA73F0076DED1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0AA6938152FA73F0076DED1 /* MainStoryboard.storyboard */; };
 		D0AA693D152FA73F0076DED1 /* SGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA693C152FA73F0076DED1 /* SGViewController.m */; };
-		D0AA6945152FA73F0076DED1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AA6944152FA73F0076DED1 /* SenTestingKit.framework */; };
-		D0AA6946152FA73F0076DED1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AA6926152FA73E0076DED1 /* UIKit.framework */; };
-		D0AA6947152FA73F0076DED1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AA6928152FA73E0076DED1 /* Foundation.framework */; };
 		D0AA694F152FA73F0076DED1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0AA694D152FA73F0076DED1 /* InfoPlist.strings */; };
 		D0AA6952152FA73F0076DED1 /* SGKeychainExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA6951152FA73F0076DED1 /* SGKeychainExampleTests.m */; };
-		D0AA6967152FAA1C0076DED1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AA6966152FAA1C0076DED1 /* Security.framework */; };
-		D0AA6968152FAA200076DED1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0AA6966152FAA1C0076DED1 /* Security.framework */; };
+		FC3EDC26545D4FB1B1F71A2A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 158DA155D6BC497A81C9EDE5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D06147911954A19B00C177EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0AA6919152FA73E0076DED1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0AA6921152FA73E0076DED1;
+			remoteInfo = SGKeychainExample;
+		};
+		D08628351954A1BA00BCFC72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0AA6919152FA73E0076DED1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0AA6921152FA73E0076DED1;
+			remoteInfo = SGKeychainExample;
+		};
+		D08628371954A1BB00BCFC72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0AA6919152FA73E0076DED1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0AA6921152FA73E0076DED1;
+			remoteInfo = SGKeychainExample;
+		};
+		D08628391954A1DA00BCFC72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0AA6919152FA73E0076DED1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0AA6921152FA73E0076DED1;
+			remoteInfo = SGKeychainExample;
+		};
+		D086283B1954A26000BCFC72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0AA6919152FA73E0076DED1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0AA6921152FA73E0076DED1;
+			remoteInfo = SGKeychainExample;
+		};
+		D086283D1954A27A00BCFC72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0AA6919152FA73E0076DED1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0AA6921152FA73E0076DED1;
+			remoteInfo = SGKeychainExample;
+		};
+		D086283F1954A36600BCFC72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0AA6919152FA73E0076DED1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0AA6921152FA73E0076DED1;
+			remoteInfo = SGKeychainExample;
+		};
+		D08628411954A39800BCFC72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0AA6919152FA73E0076DED1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0AA6921152FA73E0076DED1;
+			remoteInfo = SGKeychainExample;
+		};
 		D0AA6948152FA73F0076DED1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0AA6919152FA73E0076DED1 /* Project object */;
@@ -35,26 +86,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		158DA155D6BC497A81C9EDE5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08628431954A40600BCFC72 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0AA6922152FA73E0076DED1 /* SGKeychainExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGKeychainExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0AA6926152FA73E0076DED1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D0AA6928152FA73E0076DED1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D0AA692A152FA73E0076DED1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D0AA692E152FA73E0076DED1 /* SGKeychainExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SGKeychainExample-Info.plist"; sourceTree = "<group>"; };
 		D0AA6930152FA73E0076DED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D0AA6932152FA73F0076DED1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D0AA6934152FA73F0076DED1 /* SGKeychainExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SGKeychainExample-Prefix.pch"; sourceTree = "<group>"; };
 		D0AA6935152FA73F0076DED1 /* SGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGAppDelegate.h; sourceTree = "<group>"; };
 		D0AA6936152FA73F0076DED1 /* SGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGAppDelegate.m; sourceTree = "<group>"; };
 		D0AA6939152FA73F0076DED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D0AA693B152FA73F0076DED1 /* SGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGViewController.h; sourceTree = "<group>"; };
 		D0AA693C152FA73F0076DED1 /* SGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGViewController.m; sourceTree = "<group>"; };
 		D0AA6943152FA73F0076DED1 /* SGKeychainExampleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SGKeychainExampleTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0AA6944152FA73F0076DED1 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		D0AA694C152FA73F0076DED1 /* SGKeychainExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SGKeychainExampleTests-Info.plist"; sourceTree = "<group>"; };
 		D0AA694E152FA73F0076DED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D0AA6950152FA73F0076DED1 /* SGKeychainExampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGKeychainExampleTests.h; sourceTree = "<group>"; };
 		D0AA6951152FA73F0076DED1 /* SGKeychainExampleTests.m */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = SGKeychainExampleTests.m; sourceTree = "<group>"; tabWidth = 4; };
-		D0AA6966152FAA1C0076DED1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F8AEBF15EE634D919B6EAC17 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FB86194416ED0630002311C2 /* SGKeychainExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SGKeychainExample.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,10 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0AA6927152FA73E0076DED1 /* UIKit.framework in Frameworks */,
-				D0AA6929152FA73E0076DED1 /* Foundation.framework in Frameworks */,
-				D0AA692B152FA73E0076DED1 /* CoreGraphics.framework in Frameworks */,
-				D0AA6968152FAA200076DED1 /* Security.framework in Frameworks */,
+				8B018A0ED98A4E2E8A774639 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,10 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0AA6967152FAA1C0076DED1 /* Security.framework in Frameworks */,
-				D0AA6945152FA73F0076DED1 /* SenTestingKit.framework in Frameworks */,
-				D0AA6946152FA73F0076DED1 /* UIKit.framework in Frameworks */,
-				D0AA6947152FA73F0076DED1 /* Foundation.framework in Frameworks */,
+				FC3EDC26545D4FB1B1F71A2A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,10 +129,12 @@
 		D0AA6917152FA73E0076DED1 = {
 			isa = PBXGroup;
 			children = (
+				D08628431954A40600BCFC72 /* Default-568h@2x.png */,
 				D0AA692C152FA73E0076DED1 /* SGKeychainExample */,
 				D0AA694A152FA73F0076DED1 /* SGKeychainExampleTests */,
-				D0AA6925152FA73E0076DED1 /* Frameworks */,
 				D0AA6923152FA73E0076DED1 /* Products */,
+				F8AEBF15EE634D919B6EAC17 /* Pods.xcconfig */,
+				D283BA67CEFB41E9AD89B171 /* Frameworks */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -103,18 +147,6 @@
 				D0AA6943152FA73F0076DED1 /* SGKeychainExampleTests.octest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D0AA6925152FA73E0076DED1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D0AA6966152FAA1C0076DED1 /* Security.framework */,
-				D0AA6926152FA73E0076DED1 /* UIKit.framework */,
-				D0AA6928152FA73E0076DED1 /* Foundation.framework */,
-				D0AA692A152FA73E0076DED1 /* CoreGraphics.framework */,
-				D0AA6944152FA73F0076DED1 /* SenTestingKit.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D0AA692C152FA73E0076DED1 /* SGKeychainExample */ = {
@@ -137,7 +169,6 @@
 				D0AA692E152FA73E0076DED1 /* SGKeychainExample-Info.plist */,
 				D0AA692F152FA73E0076DED1 /* InfoPlist.strings */,
 				D0AA6932152FA73F0076DED1 /* main.m */,
-				D0AA6934152FA73F0076DED1 /* SGKeychainExample-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -161,6 +192,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D283BA67CEFB41E9AD89B171 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				158DA155D6BC497A81C9EDE5 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -168,9 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0AA6955152FA73F0076DED1 /* Build configuration list for PBXNativeTarget "SGKeychainExample" */;
 			buildPhases = (
+				0B9FA6A9F65E4E0B8C2EB819 /* Check Pods Manifest.lock */,
 				D0AA691E152FA73E0076DED1 /* Sources */,
 				D0AA691F152FA73E0076DED1 /* Frameworks */,
 				D0AA6920152FA73E0076DED1 /* Resources */,
+				7ABAE35A432D41E7ABEEE360 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -185,15 +226,25 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0AA6958152FA73F0076DED1 /* Build configuration list for PBXNativeTarget "SGKeychainExampleTests" */;
 			buildPhases = (
+				566287F7E4014052BB2D342C /* Check Pods Manifest.lock */,
 				D0AA693E152FA73F0076DED1 /* Sources */,
 				D0AA693F152FA73F0076DED1 /* Frameworks */,
 				D0AA6940152FA73F0076DED1 /* Resources */,
 				D0AA6941152FA73F0076DED1 /* ShellScript */,
+				2F680C2E61D24AF9B7B0E26A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				D0AA6949152FA73F0076DED1 /* PBXTargetDependency */,
+				D06147921954A19B00C177EA /* PBXTargetDependency */,
+				D08628361954A1BA00BCFC72 /* PBXTargetDependency */,
+				D08628381954A1BB00BCFC72 /* PBXTargetDependency */,
+				D086283A1954A1DA00BCFC72 /* PBXTargetDependency */,
+				D086283C1954A26000BCFC72 /* PBXTargetDependency */,
+				D086283E1954A27A00BCFC72 /* PBXTargetDependency */,
+				D08628401954A36600BCFC72 /* PBXTargetDependency */,
+				D08628421954A39800BCFC72 /* PBXTargetDependency */,
 			);
 			name = SGKeychainExampleTests;
 			productName = SGKeychainExampleTests;
@@ -207,8 +258,13 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SG;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Second Gear";
+				TargetAttributes = {
+					D0AA6942152FA73F0076DED1 = {
+						TestTargetID = D0AA6921152FA73E0076DED1;
+					};
+				};
 			};
 			buildConfigurationList = D0AA691C152FA73E0076DED1 /* Build configuration list for PBXProject "SGKeychainExample" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -235,6 +291,7 @@
 			files = (
 				D0AA6931152FA73E0076DED1 /* InfoPlist.strings in Resources */,
 				D0AA693A152FA73F0076DED1 /* MainStoryboard.storyboard in Resources */,
+				D08628441954A40600BCFC72 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +306,66 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0B9FA6A9F65E4E0B8C2EB819 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2F680C2E61D24AF9B7B0E26A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		566287F7E4014052BB2D342C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7ABAE35A432D41E7ABEEE360 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D0AA6941152FA73F0076DED1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -286,6 +403,46 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D06147921954A19B00C177EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0AA6921152FA73E0076DED1 /* SGKeychainExample */;
+			targetProxy = D06147911954A19B00C177EA /* PBXContainerItemProxy */;
+		};
+		D08628361954A1BA00BCFC72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0AA6921152FA73E0076DED1 /* SGKeychainExample */;
+			targetProxy = D08628351954A1BA00BCFC72 /* PBXContainerItemProxy */;
+		};
+		D08628381954A1BB00BCFC72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0AA6921152FA73E0076DED1 /* SGKeychainExample */;
+			targetProxy = D08628371954A1BB00BCFC72 /* PBXContainerItemProxy */;
+		};
+		D086283A1954A1DA00BCFC72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0AA6921152FA73E0076DED1 /* SGKeychainExample */;
+			targetProxy = D08628391954A1DA00BCFC72 /* PBXContainerItemProxy */;
+		};
+		D086283C1954A26000BCFC72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0AA6921152FA73E0076DED1 /* SGKeychainExample */;
+			targetProxy = D086283B1954A26000BCFC72 /* PBXContainerItemProxy */;
+		};
+		D086283E1954A27A00BCFC72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0AA6921152FA73E0076DED1 /* SGKeychainExample */;
+			targetProxy = D086283D1954A27A00BCFC72 /* PBXContainerItemProxy */;
+		};
+		D08628401954A36600BCFC72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0AA6921152FA73E0076DED1 /* SGKeychainExample */;
+			targetProxy = D086283F1954A36600BCFC72 /* PBXContainerItemProxy */;
+		};
+		D08628421954A39800BCFC72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0AA6921152FA73E0076DED1 /* SGKeychainExample */;
+			targetProxy = D08628411954A39800BCFC72 /* PBXContainerItemProxy */;
+		};
 		D0AA6949152FA73F0076DED1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D0AA6921152FA73E0076DED1 /* SGKeychainExample */;
@@ -325,10 +482,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -338,10 +503,14 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -350,14 +519,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -368,11 +548,13 @@
 		};
 		D0AA6956152FA73F0076DED1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8AEBF15EE634D919B6EAC17 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SGKeychainExample/SGKeychainExample.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SGKeychainExample/SGKeychainExample-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "SGKeychainExample/SGKeychainExample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -382,10 +564,12 @@
 		};
 		D0AA6957152FA73F0076DED1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8AEBF15EE634D919B6EAC17 /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SGKeychainExample/SGKeychainExample.entitlements;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SGKeychainExample/SGKeychainExample-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "SGKeychainExample/SGKeychainExample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -394,6 +578,7 @@
 		};
 		D0AA6959152FA73F0076DED1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8AEBF15EE634D919B6EAC17 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SGKeychainExample.app/SGKeychainExample";
 				CODE_SIGN_ENTITLEMENTS = SGKeychainExample/SGKeychainExample.entitlements;
@@ -401,8 +586,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SGKeychainExample/SGKeychainExample-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "SGKeychainExampleTests/SGKeychainExampleTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -412,6 +597,7 @@
 		};
 		D0AA695A152FA73F0076DED1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8AEBF15EE634D919B6EAC17 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SGKeychainExample.app/SGKeychainExample";
 				CODE_SIGN_ENTITLEMENTS = SGKeychainExample/SGKeychainExample.entitlements;
@@ -419,8 +605,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SGKeychainExample/SGKeychainExample-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "SGKeychainExampleTests/SGKeychainExampleTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";

@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Second Gear. All rights reserved.
 //
 
+#import <SGKeychain/SGKeychain.h>
 #import "SGAppDelegate.h"
-#import "SGKeychain.h"
 
 @implementation SGAppDelegate
 

@@ -6,7 +6,8 @@
 //  Copyright (c) 2012 Second Gear. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
 @interface SGAppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -1,0 +1,14 @@
+PODS:
+  - SGKeychain (1.0)
+
+DEPENDENCIES:
+  - SGKeychain (from `../`)
+
+EXTERNAL SOURCES:
+  SGKeychain:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SGKeychain: 31ce7773c2639de3ce0f0db7df18cd8a6ea64f5a
+
+COCOAPODS: 0.33.1

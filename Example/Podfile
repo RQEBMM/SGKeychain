@@ -1,6 +1,6 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '7.0'
 
-target "SGKeychainExample" do
-  pod "SGKeychain", :path => "../"
-end
+pod "SGKeychain", :path => "../"
+
+link_with 'SGKeychainExample', 'SGKeychainExampleTests'
