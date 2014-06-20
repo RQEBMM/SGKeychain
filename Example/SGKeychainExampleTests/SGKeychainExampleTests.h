@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Second Gear. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+@import XCTest;
 
-@interface SGKeychainExampleTests : SenTestCase
+@interface SGKeychainExampleTests : XCTestCase
 
 - (void)testPasswordIsSuccessfullyCreated;
 - (void)testErrorReturnedWhenPassingNilValuesOnCreate;
