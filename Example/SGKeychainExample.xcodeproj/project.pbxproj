@@ -99,10 +99,9 @@
 		D0AA6939152FA73F0076DED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		D0AA693B152FA73F0076DED1 /* SGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGViewController.h; sourceTree = "<group>"; };
 		D0AA693C152FA73F0076DED1 /* SGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGViewController.m; sourceTree = "<group>"; };
-		D0AA6943152FA73F0076DED1 /* SGKeychainExampleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SGKeychainExampleTests.octest; path = SGKeychainExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0AA6943152FA73F0076DED1 /* SGKeychainExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SGKeychainExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0AA694C152FA73F0076DED1 /* SGKeychainExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SGKeychainExampleTests-Info.plist"; sourceTree = "<group>"; };
 		D0AA694E152FA73F0076DED1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D0AA6950152FA73F0076DED1 /* SGKeychainExampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGKeychainExampleTests.h; sourceTree = "<group>"; };
 		D0AA6951152FA73F0076DED1 /* SGKeychainExampleTests.m */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = SGKeychainExampleTests.m; sourceTree = "<group>"; tabWidth = 4; };
 		F8AEBF15EE634D919B6EAC17 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FB86194416ED0630002311C2 /* SGKeychainExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SGKeychainExample.entitlements; sourceTree = "<group>"; };
@@ -146,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				D0AA6922152FA73E0076DED1 /* SGKeychainExample.app */,
-				D0AA6943152FA73F0076DED1 /* SGKeychainExampleTests.octest */,
+				D0AA6943152FA73F0076DED1 /* SGKeychainExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,7 +178,6 @@
 		D0AA694A152FA73F0076DED1 /* SGKeychainExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				D0AA6950152FA73F0076DED1 /* SGKeychainExampleTests.h */,
 				D0AA6951152FA73F0076DED1 /* SGKeychainExampleTests.m */,
 				D0AA694B152FA73F0076DED1 /* Supporting Files */,
 			);
@@ -251,7 +249,7 @@
 			);
 			name = SGKeychainExampleTests;
 			productName = SGKeychainExampleTests;
-			productReference = D0AA6943152FA73F0076DED1 /* SGKeychainExampleTests.octest */;
+			productReference = D0AA6943152FA73F0076DED1 /* SGKeychainExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */

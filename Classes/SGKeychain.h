@@ -25,41 +25,53 @@
 //
 
 @import Foundation;
+@import Security;
+
+#import <SGKeychain/SGKeychainItem.h>
+
+typedef void (^SGKeychainCompletionBlock)(NSError *error);
 
 @interface SGKeychain : NSObject
 
-// Create
++ (void)storeKeychainItem:(SGKeychainItem *)item completionHandler:(SGKeychainCompletionBlock)handler;
+
++ (void)populatePasswordForItem:(SGKeychainItem *)item completionHandler:(SGKeychainCompletionBlock)handler;
+
++ (void)deleteKeychainItem:(SGKeychainItem *)item completionHandler:(SGKeychainCompletionBlock)handler;
+
++ (NSString *)passwordForUsername:(NSString *)username
+                      serviceName:(NSString *)serviceName
+                            error:(NSError **)error;
+
++ (NSString *)passwordForUsername:(NSString *)username
+                      serviceName:(NSString *)serviceName
+                      accessGroup:(NSString *)accessGroup
+                            error:(NSError **)error;
+@end
+
+@interface SGKeychain (Deprecated)
+
 + (BOOL)setPassword:(NSString *)password
            username:(NSString *)username
         serviceName:(NSString *)serviceName
      updateExisting:(BOOL)updateExisting
-              error:(NSError **)error;
-
+              error:(NSError **)error __attribute__ ((deprecated));
+    
 + (BOOL)setPassword:(NSString *)password
            username:(NSString *)username
         serviceName:(NSString *)serviceName
         accessGroup:(NSString *)accessGroup
-     updateExisting:(BOOL) updateExisting
-              error:(NSError **)error;
-
-// Read
-+ (NSString *)passwordForUsername:(NSString *)username
-                      serviceName:(NSString *)serviceName
-                            error:(NSError **)error;
-
-+ (NSString *)passwordForUsername:(NSString *)username
-                      serviceName:(NSString *)serviceName
-                      accessGroup:(NSString *)accessGroup
-                            error:(NSError **)error;
+     updateExisting:(BOOL)updateExisting
+              error:(NSError **)error __attribute__ ((deprecated));
 
 // Delete
 + (BOOL)deletePasswordForUsername:(NSString *)username
                       serviceName:(NSString *)serviceName
-                            error:(NSError **)error;
+                            error:(NSError **)error __attribute__ ((deprecated));
 
 + (BOOL)deletePasswordForUsername:(NSString *)username
                       serviceName:(NSString *)serviceName
                       accessGroup:(NSString *)accessGroup
-                            error:(NSError **)error;
+                            error:(NSError **)error __attribute__ ((deprecated));
 
 @end

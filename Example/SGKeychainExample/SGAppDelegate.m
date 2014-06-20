@@ -15,41 +15,51 @@
 {
     // Store a password
     NSError *storePasswordError = nil;
-    BOOL passwordSuccessfullyCreated = [SGKeychain setPassword:@"testpassword" username:@"justin" serviceName:@"Twitter" updateExisting:NO error:&storePasswordError];
     
-    if (passwordSuccessfullyCreated == YES)
-    {
-        NSLog(@"Password successfully created");
-    }
-    else
-    {
-        NSLog(@"Password failed to be created with error: %@", storePasswordError);
-    }    
+    SGKeychainItem *item = [[SGKeychainItem alloc] init];
+    item.account = @"justin";
+    item.service = @"Glassboard";
+    item.secret = @"testpassword";
+    
+    [SGKeychain storeKeychainItem:item completionHandler:^(NSError *error) {
+        if (error == nil)
+        {
+            NSLog(@"Password successfully created");
+        }
+        else
+        {
+            NSLog(@"Password failed to be created with error: %@", storePasswordError);
+        }    
+
+    }];
     
     // Fetch the password
-    NSError *fetchPasswordError = nil;
-    NSString *password = [SGKeychain passwordForUsername:@"justin" serviceName:@"Twitter" error:&fetchPasswordError];
-    
-    if (password != nil)
-    {
-        NSLog(@"Fetched password = %@", password);    
-    }
-    else
-    {
-        NSLog(@"Error fetching password = %@", fetchPasswordError);
-    }    
+    item.secret = nil;
+    [SGKeychain populatePasswordForItem:item completionHandler:^(NSError *error) {
+        if (error == nil)
+        {
+            NSLog(@"Fetched password = %@", item.secret);
+        }
+        else
+        {
+            NSLog(@"Error fetching password = %@", error);
+        }
+        
+    }];
     
     // Delete the password
     NSError *deletePasswordError = nil;
-    BOOL passwordSuccessfullyDeleted = [SGKeychain deletePasswordForUsername:@"justin" serviceName:@"Twitter" error:&deletePasswordError];
-    if (passwordSuccessfullyDeleted == YES)
-    {
-        NSLog(@"Password successfully deleted");
-    }
-    else
-    {
-        NSLog(@"Failed to delete password: %@", deletePasswordError);
-    }
+    [SGKeychain deleteKeychainItem:item completionHandler:^(NSError *error) {
+        if (error == nil)
+        {
+            NSLog(@"Password successfully deleted");
+        }
+        else
+        {
+            NSLog(@"Failed to delete password: %@", deletePasswordError);
+        }
+    }];
+
     return YES;
 }
 

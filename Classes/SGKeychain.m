@@ -24,18 +24,88 @@
 //  THE SOFTWARE.
 //
 
-@import Security;
 #import "SGKeychain.h"
-
-enum SGKeychainErrorCodes
-{
-    SGKeychainRequiredValueNotPresentError = -666,
-    SGKeychainPasswordNotFoundError = -777,
-};
-
-static NSString * const SGKeychainErrorDomain = @"com.secondgear.sgkeychain";
+#import "SGKeychainItem.h"
 
 @implementation SGKeychain
+
+#pragma mark -
+#pragma mark Store Keychain Item
+// +--------------------------------------------------------------------
+// | Store Keychain Item
+// +--------------------------------------------------------------------
+
++ (void)storeKeychainItem:(SGKeychainItem *)item completionHandler:(SGKeychainCompletionBlock)handler
+{
+    if ([item isValid] == NO)
+    {
+        if (handler != nil)
+        {
+            handler([self missingDataError]);
+        }
+        
+        return;
+    }
+    
+    NSError *persistError = nil;
+    [item saveChanges:&persistError];
+    
+    if (handler != nil)
+    {
+        handler(persistError);
+    }
+}
+
+#pragma mark -
+#pragma mark Read Keychain Items
+// +--------------------------------------------------------------------
+// | Read Keychain Items
+// +--------------------------------------------------------------------
+
++ (void)populatePasswordForItem:(SGKeychainItem *)item completionHandler:(SGKeychainCompletionBlock)handler
+{
+    NSError *populateError = nil;
+    [item populatePasswordField:&populateError];
+    
+    if (handler != nil)
+    {
+        handler(populateError);
+    }
+}
+
+
+#pragma mark -
+#pragma mark Delete Keychain Items
+// +--------------------------------------------------------------------
+// | Delete Keychain Items
+// +--------------------------------------------------------------------
+
++ (void)deleteKeychainItem:(SGKeychainItem *)item completionHandler:(SGKeychainCompletionBlock)handler
+{
+    if ([item isValid] == NO)
+    {
+        if (handler != nil)
+        {
+            handler([self missingDataError]);
+        }
+        
+        return;
+    }
+
+    NSError *deleteError = nil;
+    [item removeFromKeychain:&deleteError];
+    
+    if (handler != nil)
+    {
+        handler(deleteError);
+    }    
+}
+
+#pragma mark -
+#pragma mark Private/Convenience Methods
+// +--------------------------------------------------------------------
+// | Private/Convenience Methods
+// +--------------------------------------------------------------------
 
 + (NSString *)passwordForUsername:(NSString *)username serviceName:(NSString *)serviceName error:(NSError **)error
 {
@@ -54,234 +124,22 @@ static NSString * const SGKeychainErrorDomain = @"com.secondgear.sgkeychain";
         return nil;
     }
 
-    NSDictionary *attributes = @{
-                                 (__bridge id)kSecClass : (__bridge id)kSecClassGenericPassword,
-                                 (__bridge id)kSecAttrService : serviceName,
-                                 (__bridge id)kSecAttrAccount : username
-                                 };
-    
-    NSMutableDictionary *attributesQuery = [attributes mutableCopy];
-#if !TARGET_IPHONE_SIMULATOR
-    if (accessGroup != nil)
+    NSError *populateError = nil;
+    SGKeychainItem *item = [[SGKeychainItem alloc] init];
+    item.account = username;
+    item.service = serviceName;
+    if ([item populatePasswordField:&populateError] == NO)
     {
-        [attributesQuery setObject:accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
-    }
-#endif
-
-    OSStatus getPasswordStatus = noErr;
-    NSMutableDictionary *queryDictionary = [attributesQuery mutableCopy];
-    [queryDictionary setObject:(id)kCFBooleanTrue forKey:(__bridge id)kSecReturnAttributes];
-
-    CFTypeRef result = NULL;
-    getPasswordStatus = SecItemCopyMatching((__bridge CFDictionaryRef)queryDictionary, &result);
-
-    if (getPasswordStatus != noErr)
-    {
-        if ((error != nil) && (getPasswordStatus != errSecItemNotFound))
-        {
-            *error = [NSError errorWithDomain:SGKeychainErrorDomain code:getPasswordStatus userInfo:nil];
-        }
-        
+        //*error = [populateError copy];
         return nil;
     }
     
-    if (result)
-    {
-        CFRelease(result);
-    }
-
-    NSMutableDictionary *passwordQuery = [attributesQuery mutableCopy];
-    [passwordQuery setObject:(id)kCFBooleanTrue forKey:(__bridge id)kSecReturnData];
-    CFTypeRef passwordResult = NULL;
-    getPasswordStatus = SecItemCopyMatching((__bridge CFDictionaryRef)passwordQuery, &passwordResult);
-    NSData *resultData = (__bridge_transfer NSData *)passwordResult;
-
-    if (getPasswordStatus != noErr)
-    {
-        if (getPasswordStatus == errSecItemNotFound)
-        {
-            if (error != nil)
-            {
-				*error = [NSError errorWithDomain:SGKeychainErrorDomain code:SGKeychainPasswordNotFoundError userInfo: nil];
-			}
-        }
-        else
-        {
-            if (error != nil)
-            {
-                *error = [NSError errorWithDomain:SGKeychainErrorDomain code:getPasswordStatus userInfo:nil];
-            }
-        }
-    }
-
-	NSString *password = nil;
-    
-	if (resultData != nil)
-    {
-		password = [[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding];
-	}
-	else
-    {
-		if (error != nil)
-        {
-			*error = [NSError errorWithDomain:SGKeychainErrorDomain code:SGKeychainPasswordNotFoundError userInfo: nil];
-		}
-	}
-
-    return password;
+    return item.secret;
 }
 
-+ (BOOL)setPassword:(NSString *)password username:(NSString *)username serviceName:(NSString *)serviceName updateExisting:(BOOL)updateExisting error:(NSError **)error
-
++ (NSError *)missingDataError
 {
-    return [SGKeychain setPassword:password username:username serviceName:serviceName accessGroup:nil updateExisting:updateExisting error:error];
-}
-
-+ (BOOL)setPassword:(NSString *)password username:(NSString *)username serviceName:(NSString *)serviceName accessGroup:(NSString *)accessGroup updateExisting:(BOOL)updateExisting error:(NSError **)error
-{
-    BOOL requiredValueIsNil = ((password == nil) || (username == nil) || (serviceName == nil));
-    if (requiredValueIsNil == YES)
-    {
-        if (error != nil)
-        {
-            *error = [NSError errorWithDomain:SGKeychainErrorDomain code:SGKeychainRequiredValueNotPresentError userInfo:nil];
-        }
-        return NO;
-    }
-
-	NSError *getPasswordError = nil;
-	NSString *existingPassword = [SGKeychain passwordForUsername:username serviceName:serviceName accessGroup:accessGroup error:&getPasswordError];
-
-    if ([getPasswordError code] == SGKeychainPasswordNotFoundError)
-    {
-        NSError *deletePasswordError;
-        [self deletePasswordForUsername:username serviceName:serviceName accessGroup:accessGroup error:&deletePasswordError];
-        if ([deletePasswordError code] != noErr)
-        {
-            if (error != nil)
-            {
-                *error = deletePasswordError;
-            }
-
-            return NO;
-        }
-        else if ([deletePasswordError code] != noErr)
-        {
-            if (error != nil)
-            {
-                *error = deletePasswordError;
-            }
-            return NO;
-        }
-    }
-
- 	OSStatus setPasswordStatus = noErr;
-    if (existingPassword != nil)
-    {
-		if (([existingPassword isEqualToString:password] == NO) && (updateExisting == YES))
-        {
-
-            NSDictionary *attributes = @{
-                                         (__bridge id)kSecClass : (__bridge id)kSecClassGenericPassword,
-                                         (__bridge id)kSecAttrService : serviceName,
-                                         (__bridge id)kSecAttrLabel : serviceName,
-                                         (__bridge id)kSecAttrAccount : username
-                                         };
-            
-            NSMutableDictionary *attributesQuery = [attributes mutableCopy];
-#if !TARGET_IPHONE_SIMULATOR
-            if (accessGroup != nil)
-            {
-                [attributesQuery setObject:accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
-            }
-#endif
-
-            NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *newValueDictionary = [NSDictionary dictionaryWithObject:passwordData forKey:(__bridge NSString *) kSecValueData];
-			setPasswordStatus = SecItemUpdate((__bridge CFDictionaryRef)attributesQuery, (__bridge CFDictionaryRef)newValueDictionary);
-		}
-    }
-    else
-    {
-        
-        NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *attributes = @{
-                                     (__bridge id)kSecClass : (__bridge id)kSecClassGenericPassword,
-                                     (__bridge id)kSecAttrService : serviceName,
-                                     (__bridge id)kSecAttrLabel : serviceName,
-                                     (__bridge id)kSecAttrAccount : username,
-                                     (__bridge id)kSecValueData : passwordData
-                                     };
-        
-
-        NSMutableDictionary *query = [attributes mutableCopy];
-#if !TARGET_IPHONE_SIMULATOR
-        if (accessGroup != nil)
-        {
-            [query setObject:accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
-        }
-#endif
-
-		setPasswordStatus = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
-    }
-
-    if (setPasswordStatus != noErr)
-    {
-        if (error != nil)
-        {
-            *error = [NSError errorWithDomain:SGKeychainErrorDomain code:setPasswordStatus userInfo:nil];
-        }
-        return NO;
-    }
-
-    return YES;
-}
-
-
-+ (BOOL)deletePasswordForUsername:(NSString *)username serviceName:(NSString *)serviceName error:(NSError **)error
-{
-    return [SGKeychain deletePasswordForUsername:username serviceName:serviceName accessGroup:nil error:error];
-}
-
-+ (BOOL)deletePasswordForUsername:(NSString *)username serviceName:(NSString *)serviceName accessGroup:(NSString *)accessGroup error:(NSError **)error
-{
-    BOOL requiredValueIsNil = ((username == nil) || (serviceName == nil));
-    if (requiredValueIsNil == YES)
-    {
-        if (error != nil)
-        {
-            *error = [NSError errorWithDomain:SGKeychainErrorDomain code:SGKeychainRequiredValueNotPresentError userInfo:nil];
-            return NO;
-        }
-    }
-
-    NSArray *keys = [NSArray arrayWithObjects:(__bridge NSString *)kSecClass,
-                     kSecAttrService,
-                     kSecAttrAccount,
-                     kSecReturnAttributes, nil];
-
-    NSArray *objects = [NSArray arrayWithObjects:(__bridge NSString *) kSecClassGenericPassword,
-                        serviceName,
-                        username,
-                        kCFBooleanTrue, nil];
-
-    NSMutableDictionary *query = [NSMutableDictionary dictionaryWithObjects:objects forKeys:keys];
-#if !TARGET_IPHONE_SIMULATOR
-    if (accessGroup != nil)
-    {
-        [query setObject:accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
-    }
-#endif
-
-    OSStatus deleteItemStatus = SecItemDelete((__bridge CFDictionaryRef) query);
-
-    if ((error != nil) && (deleteItemStatus != noErr))
-    {
-        *error = [NSError errorWithDomain:SGKeychainErrorDomain code:deleteItemStatus userInfo:nil];
-        return NO;
-    }
-
-    return YES;
+    return [NSError errorWithDomain:SGKeychainErrorDomain code:SGKeychainRequiredValueNotPresentError userInfo:nil];
 }
 
 @end

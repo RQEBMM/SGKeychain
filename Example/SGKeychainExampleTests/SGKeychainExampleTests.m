@@ -6,20 +6,21 @@
 //  Copyright (c) 2012 Second Gear. All rights reserved.
 //
 
-#import <SGKeychain/SGKeychain.h>
-#import "SGKeychainExampleTests.h"
 
-@interface SGKeychainExampleTests ()
+@import XCTest;
+
+#import <SGKeychain/SGKeychain.h>
+
+@interface SGKeychainExampleTests : XCTestCase
+
+@property (nonatomic, strong) SGKeychainItem *defaultItem;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *service;
 @property (nonatomic, copy) NSString *expectedPassword;
+
 @end
 
 @implementation SGKeychainExampleTests
-
-@synthesize username;
-@synthesize service;
-@synthesize expectedPassword;
 
 // Thanks to David H
 // http://stackoverflow.com/questions/11726672/access-app-identifier-prefix-programmatically
@@ -48,85 +49,134 @@
     [super setUp];
     self.username = @"justin";
     self.service = @"com.secondgear.testapp";
-    self.expectedPassword = @"testpassword";    
+    self.expectedPassword = @"testpassword";
+    
+    self.defaultItem = [[SGKeychainItem alloc] init];
+    self.defaultItem.account = self.username;
+    self.defaultItem.accessibility = SGKeychainAccessibilityAfterFirstUnlock;
+    self.defaultItem.service = self.service;
 }
 
 - (void)tearDown
 {
     [super tearDown];
+    
     // Delete the keychain password before each test.
-    [SGKeychain deletePasswordForUsername:self.username serviceName:self.service error:nil];
+    [self deleteAllKeysForSecClass:kSecClassGenericPassword];
+    [self deleteAllKeysForSecClass:kSecClassInternetPassword];
+    [self deleteAllKeysForSecClass:kSecClassCertificate];
+    [self deleteAllKeysForSecClass:kSecClassKey];
+    [self deleteAllKeysForSecClass:kSecClassIdentity];
     
     self.username = nil;
     self.service = nil;
     self.expectedPassword = nil;
+    self.defaultItem = nil;
 }
 
 - (void)testPasswordIsSuccessfullyCreated
 {
-    NSString *password = @"testpassword";
-    BOOL successfullyCreated = [SGKeychain setPassword:password username:self.username serviceName:self.service updateExisting:NO error:nil];
-    XCTAssertTrue(successfullyCreated, @"create password failed");    
-    XCTAssertEqualObjects(password, self.expectedPassword, @"Incorrect password fetched");
+    // Arrange
+    __block NSError *savedError = nil;
+    self.defaultItem.secret = @"testpassword";
+    
+    // Act
+    [SGKeychain storeKeychainItem:self.defaultItem completionHandler:^(NSError *error) {
+        savedError = error;
+    }];
+    
+    // Analyze
+    XCTAssertNil(savedError);
 }
 
 - (void)testErrorReturnedWhenPassingNilValuesOnCreate
 {
-    NSError *error = nil;
-    BOOL successfullyCreated = [SGKeychain setPassword:nil username:self.username serviceName:self.service updateExisting:NO error:&error];
-    XCTAssertFalse(successfullyCreated, @"create password didn't fail as expected");    
+    // Arrange
+    __block NSError *saveError = nil;
+    self.defaultItem.secret = nil;
+    self.defaultItem.account = nil;
     
-    XCTAssertTrue([error code] == -666, @"Error code received not as expected");
+    // Act
+    [SGKeychain storeKeychainItem:self.defaultItem completionHandler:^(NSError *error) {
+        saveError = error;
+    }];
+
+    // Analyze
+    XCTAssertNotNil(saveError);
+    XCTAssertTrue([saveError code] == -666);
 }
 
 - (void)testExistingPasswordRecordSuccessfullyUpdated
 {
+    // Arrange
+    __block NSError *saveError = nil;
     NSString *oldPassword = @"oldpassword";
     NSString *newPassword = @"newpassword";
-    BOOL successfullyCreated = [SGKeychain setPassword:oldPassword username:self.username serviceName:self.service updateExisting:NO error:nil];
-    XCTAssertTrue(successfullyCreated, @"create password failed");    
+    self.defaultItem.secret = oldPassword;
+    [SGKeychain storeKeychainItem:self.defaultItem completionHandler:nil];
     
-    BOOL successfullyUpdated = [SGKeychain setPassword:newPassword username:self.username serviceName:self.service updateExisting:YES error:nil];
-    XCTAssertTrue(successfullyUpdated, @"updating an existing password failed");
+    // Act
+    self.defaultItem.secret = newPassword;
+    [SGKeychain storeKeychainItem:self.defaultItem completionHandler:^(NSError *error) {
+        saveError = error;
+    }];
+    
+    // Analyze
+    XCTAssertNil(saveError);
     
     NSString *password = [SGKeychain passwordForUsername:self.username serviceName:self.service error:nil];    
-    XCTAssertEqualObjects(password, newPassword, @"Incorrect password fetched after update");
+    XCTAssertEqualObjects(password, newPassword);
 }
 
 - (void)testPasswordIsSuccessfullyFetched
 {
+    // Arrange
     NSString *testpassword = @"testpassword";
-    [SGKeychain setPassword:testpassword username:self.username serviceName:self.service updateExisting:NO error:nil];
+    self.defaultItem.secret = testpassword;
+    [SGKeychain storeKeychainItem:self.defaultItem completionHandler:nil];
     
+    
+    // Act
     NSString *password = [SGKeychain passwordForUsername:self.username serviceName:self.service error:nil];
-    XCTAssertEqualObjects(password, expectedPassword, @"Expected password not fetched from keychain.");
+    
+    // Analyze
+    XCTAssertEqualObjects(password, self.expectedPassword, @"Expected password not fetched from keychain.");
 }
 
 - (void)testPasswordsAreSuccessfullyFetchedFromSameAccessGroup
 {
+    // Arrange
     NSString *accessGroup = [[self bundleSeedID] stringByAppendingString:@".shared"];
-
-    NSError *error;
 
     // Add a password for justin and justinw to the access group
     NSString *firstpassword = @"firstpassword";
-    XCTAssertTrue([SGKeychain setPassword:firstpassword username:self.username serviceName:self.service accessGroup:accessGroup updateExisting:NO error:&error],
-                 @"Could not set first password: %@", error);
-
+    SGKeychainItem *firstItem = [[SGKeychainItem alloc] init];
+    firstItem.secret = firstpassword;
+    firstItem.account = self.username;
+    firstItem.service = self.service;
+    firstItem.accessGroup = accessGroup;
+    [SGKeychain storeKeychainItem:firstItem completionHandler:nil];
+    
     NSString *secondpassword = @"secondpassword";
-    XCTAssertTrue([SGKeychain setPassword:secondpassword username:@"justinw" serviceName:self.service accessGroup:accessGroup updateExisting:NO error:&error],
-                 @"Could not set second password: %@", error);
-    
-    // Ensure that the passwords can be retrieved
+    NSString *secondUsername = @"justinw";
+    SGKeychainItem *secondItem = [[SGKeychainItem alloc] init];
+    secondItem.secret = secondpassword;
+    secondItem.account = secondUsername;
+    secondItem.service = self.service;
+    secondItem.accessGroup = accessGroup;
+    [SGKeychain storeKeychainItem:secondItem completionHandler:nil];
+
+    // Act
     NSString *password1 = [SGKeychain passwordForUsername:self.username serviceName:self.service accessGroup:accessGroup error:nil];
-    XCTAssertEqualObjects(password1, firstpassword, @"Expected password for justin not fetched from keychain access group.");    
-    
     NSString *password2 = [SGKeychain passwordForUsername:@"justinw" serviceName:self.service accessGroup:accessGroup error:nil];
-    XCTAssertEqualObjects(password2, secondpassword, @"Expected password for justinw not fetched from keychain access group.");    
+    
+    // Analyze
+    XCTAssertEqualObjects(password1, firstpassword);
+    XCTAssertEqualObjects(password2, secondpassword);
     
     // Delete the passwords
-    [SGKeychain deletePasswordForUsername:self.username serviceName:self.service accessGroup:accessGroup error:nil];
-    [SGKeychain deletePasswordForUsername:@"justinw" serviceName:self.service accessGroup:accessGroup error:nil];
+    [firstItem removeFromKeychainInBackground];
+    [secondItem removeFromKeychainInBackground];
 }
 
 - (void)testErrorReturnedWhenPassingNilValuesOnFetch
@@ -141,18 +191,43 @@
 
 - (void)testPasswordIsSuccessfullyDeleted
 {
+    // Arrange
     NSString *testpassword = @"testpassword";
-    [SGKeychain setPassword:testpassword username:self.username serviceName:self.service updateExisting:NO error:nil];
+    self.defaultItem.secret = testpassword;
+    [SGKeychain storeKeychainItem:self.defaultItem completionHandler:nil];
 
-    BOOL successfullyDeleted = [SGKeychain deletePasswordForUsername:self.username serviceName:self.service error:nil];
-    XCTAssertTrue(successfullyDeleted, @"deleting an existing password failed");
+    // Act
+    __block NSError *deleteError = nil;
+    [SGKeychain deleteKeychainItem:self.defaultItem completionHandler:^(NSError *error) {
+        deleteError = error;
+    }];
+    
+    // Analyze
+    XCTAssertNil(deleteError);
 }
 
 - (void)testErrorReturnedWhenPassingNilValuesOnDelete
 {
-    NSError *error = nil;
-    [SGKeychain deletePasswordForUsername:nil serviceName:self.service error:&error];    
-    XCTAssertTrue([error code] == -666, @"Error code received not as expected");
+    // Arrange
+    self.defaultItem.account = nil;
+    
+    // Act
+    __block NSError *deleteError = nil;
+    [SGKeychain deleteKeychainItem:self.defaultItem completionHandler:^(NSError *error) {
+        deleteError = error;
+    }];
+    
+    // Analyze
+    XCTAssertNotNil(deleteError);
+    XCTAssertTrue([deleteError code] == -666, @"Error code received not as expected");
+}
+
+- (void)deleteAllKeysForSecClass:(CFTypeRef)secClass
+{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:(__bridge id)secClass forKey:(__bridge id)kSecClass];
+    OSStatus result = SecItemDelete((__bridge CFDictionaryRef) dict);
+    NSAssert(result == noErr || result == errSecItemNotFound, @"Error deleting keychain data (%ld)", result);
 }
 
 @end
