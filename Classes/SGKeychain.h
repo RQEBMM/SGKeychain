@@ -24,42 +24,42 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface SGKeychain : NSObject
 
 // Create
-+ (BOOL)setPassword:(NSString *)password 
-           username:(NSString *)username 
-        serviceName:(NSString *)serviceName 
-     updateExisting:(BOOL)updateExisting 
++ (BOOL)setPassword:(NSString *)password
+           username:(NSString *)username
+        serviceName:(NSString *)serviceName
+     updateExisting:(BOOL)updateExisting
               error:(NSError **)error;
 
-+ (BOOL)setPassword:(NSString *)password 
-           username:(NSString *)username 
-        serviceName:(NSString *)serviceName 
-        accessGroup:(NSString *)accessGroup 
-     updateExisting:(BOOL) updateExisting 
++ (BOOL)setPassword:(NSString *)password
+           username:(NSString *)username
+        serviceName:(NSString *)serviceName
+        accessGroup:(NSString *)accessGroup
+     updateExisting:(BOOL) updateExisting
               error:(NSError **)error;
 
 // Read
-+ (NSString *)passwordForUsername:(NSString *)username 
-                      serviceName:(NSString *)serviceName 
++ (NSString *)passwordForUsername:(NSString *)username
+                      serviceName:(NSString *)serviceName
                             error:(NSError **)error;
 
-+ (NSString *)passwordForUsername:(NSString *)username 
-                      serviceName:(NSString *)serviceName 
-                      accessGroup:(NSString *)accessGroup 
++ (NSString *)passwordForUsername:(NSString *)username
+                      serviceName:(NSString *)serviceName
+                      accessGroup:(NSString *)accessGroup
                             error:(NSError **)error;
 
 // Delete
-+ (BOOL)deletePasswordForUsername:(NSString *)username 
-                      serviceName:(NSString *)serviceName 
++ (BOOL)deletePasswordForUsername:(NSString *)username
+                      serviceName:(NSString *)serviceName
                             error:(NSError **)error;
 
-+ (BOOL)deletePasswordForUsername:(NSString *)username 
-                      serviceName:(NSString *)serviceName 
-                      accessGroup:(NSString *)accessGroup 
++ (BOOL)deletePasswordForUsername:(NSString *)username
+                      serviceName:(NSString *)serviceName
+                      accessGroup:(NSString *)accessGroup
                             error:(NSError **)error;
 
 @end
