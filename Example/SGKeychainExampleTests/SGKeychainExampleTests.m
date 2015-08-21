@@ -53,7 +53,6 @@
     
     self.defaultItem = [[SGKeychainItem alloc] init];
     self.defaultItem.account = self.username;
-    self.defaultItem.accessibility = SGKeychainAccessibilityAfterFirstUnlock;
     self.defaultItem.service = self.service;
 }
 
