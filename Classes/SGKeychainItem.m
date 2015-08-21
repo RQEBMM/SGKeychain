@@ -111,7 +111,11 @@ NSString * const SGKeychainErrorDomain = @"com.secondgear.sgkeychain";
             saveStatus = YES;
         }
     }
-    
+    if (saveStatus)
+    {
+        // sync values in keychainItem with the values actually in the keychain after our save
+        [self populatePasswordField:error];
+    }
     return saveStatus;
 }
 
@@ -120,7 +124,20 @@ NSString * const SGKeychainErrorDomain = @"com.secondgear.sgkeychain";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         [self populatePasswordField:nil];
     });
+}
 
+- (void)populateAttributesFieldInBackground
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        [self populateAttributesField:nil];
+    });
+}
+
+- (void)populatePersistentReferenceFieldInBackground
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        [self populatePersistentReferenceField:nil];
+    });
 }
 
 - (BOOL)populatePasswordField:(NSError **)error
@@ -147,6 +164,64 @@ NSString * const SGKeychainErrorDomain = @"com.secondgear.sgkeychain";
         NSData *resultData = (__bridge_transfer NSData *)passwordResult;
         NSString *password = [[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding];
         self.secret = password;
+        populateStatus = YES;
+    }
+    
+    return populateStatus;
+}
+
+- (BOOL)populatePersistentReferenceField:(NSError **)error
+{
+    if ([self isPersistedToKeychain] == NO && (error != nil))
+    {
+        *error = [self handleErrorForStatus:errSecItemNotFound];
+        return NO;
+    }
+    
+    BOOL populateStatus = NO;
+    
+    NSMutableDictionary *passwordQuery = [[self keychainAttributes] mutableCopy];
+    passwordQuery[(__bridge id)kSecReturnPersistentRef] = (id)kCFBooleanTrue;
+    CFTypeRef passwordResult = NULL;
+    OSStatus getPasswordStatus = SecItemCopyMatching((__bridge CFDictionaryRef)passwordQuery, &passwordResult);
+    
+    if ((getPasswordStatus != noErr) && (error != nil))
+    {
+        *error = [self handleErrorForStatus:getPasswordStatus];
+    }
+    else
+    {
+        NSData *resultData = (__bridge_transfer NSData *)passwordResult;
+        self.persistentRef = resultData;
+        populateStatus = YES;
+    }
+    
+    return populateStatus;
+}
+
+- (BOOL)populateAttributesField:(NSError **)error
+{
+    if ([self isPersistedToKeychain] == NO && (error != nil))
+    {
+        *error = [self handleErrorForStatus:errSecItemNotFound];
+        return NO;
+    }
+    
+    BOOL populateStatus = NO;
+    
+    NSMutableDictionary *passwordQuery = [[self keychainAttributes] mutableCopy];
+    passwordQuery[(__bridge id)kSecReturnAttributes] = (id)kCFBooleanTrue;
+    CFTypeRef passwordResult = NULL;
+    OSStatus getPasswordStatus = SecItemCopyMatching((__bridge CFDictionaryRef)passwordQuery, &passwordResult);
+    
+    if ((getPasswordStatus != noErr) && (error != nil))
+    {
+        *error = [self handleErrorForStatus:getPasswordStatus];
+    }
+    else
+    {
+        NSDictionary *resultData = (__bridge_transfer NSDictionary *)passwordResult;
+        self.attributes = resultData;
         populateStatus = YES;
     }
     
@@ -281,7 +356,6 @@ NSString * const SGKeychainErrorDomain = @"com.secondgear.sgkeychain";
     
     return errorMessage;
 }
-
 
 - (NSError *)handleErrorForStatus:(OSStatus)status
 {

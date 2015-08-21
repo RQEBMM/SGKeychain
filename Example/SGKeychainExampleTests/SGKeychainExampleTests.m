@@ -187,7 +187,6 @@
     XCTAssertTrue([error code] == -666, @"Error code received not as expected");
 }
 
-
 - (void)testPasswordIsSuccessfullyDeleted
 {
     // Arrange
@@ -226,7 +225,37 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject:(__bridge id)secClass forKey:(__bridge id)kSecClass];
     OSStatus result = SecItemDelete((__bridge CFDictionaryRef) dict);
-    NSAssert(result == noErr || result == errSecItemNotFound, @"Error deleting keychain data (%ld)", result);
+    NSAssert(result == noErr || result == errSecItemNotFound, @"Error deleting keychain data (%d)", (int)result);
+}
+ 
+- (void)testPasswordAttributesSuccessfullyFetched
+{
+    // Arrange
+    NSString *testpassword = @"testpassword";
+    self.defaultItem.secret = testpassword;
+    [SGKeychain storeKeychainItem:self.defaultItem completionHandler:nil];
+    
+    NSError *err;
+    [self.defaultItem populateAttributesField:&err];
+    
+    NSDictionary *passwordAttributes = self.defaultItem.attributes;
+    XCTAssertNil(err, @"Error fetching password attributes");
+    XCTAssertNotNil(passwordAttributes, @"Password attributes not fetched from keychain.");
+}
+
+- (void)testPasswordReferenceSuccessfullyFetched
+{
+    // Arrange
+    NSString *testpassword = @"testpassword";
+    self.defaultItem.secret = testpassword;
+    [SGKeychain storeKeychainItem:self.defaultItem completionHandler:nil];
+    
+    NSError *err;
+    [self.defaultItem populatePersistentReferenceField:&err];
+    
+    NSData *passwordRef = self.defaultItem.persistentRef;
+    XCTAssertNil(err, @"Error fetching password attributes");
+    XCTAssertNotNil(passwordRef, @"Password attributes not fetched from keychain.");
 }
 
 @end

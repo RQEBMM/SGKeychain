@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, SGKeychainErrorCode)
     SGKeychainNoError = 0,
     SGKeychainRequiredValueNotPresentError = -666,
     SGKeychainPasswordNotFoundError = -777,
+    SGKeychainUnknownError = -888,
 };
 
 extern NSString * const SGKeychainErrorDomain;
@@ -58,6 +59,8 @@ typedef NS_ENUM(NSUInteger, SGKeychainAccessibility)
 @property (nonatomic, copy) NSString *account;
 @property (nonatomic, copy) NSString *accessGroup;
 @property (nonatomic, copy) NSString *secret;
+@property (nonatomic, copy) NSDictionary *attributes;
+@property (nonatomic, copy) NSData *persistentRef;
 
 @property (nonatomic, assign) SGKeychainAccessibility accessibility;
 
@@ -70,6 +73,12 @@ typedef NS_ENUM(NSUInteger, SGKeychainAccessibility)
 
 - (void)populatePasswordFieldInBackground;
 - (BOOL)populatePasswordField:(NSError **)error;
+
+- (void)populatePersistentReferenceFieldInBackground;
+- (BOOL)populatePersistentReferenceField:(NSError **)error;
+
+- (void)populateAttributesFieldInBackground;
+- (BOOL)populateAttributesField:(NSError **)error;
 
 - (void)removeFromKeychainInBackground;
 - (BOOL)removeFromKeychain:(NSError **)error;

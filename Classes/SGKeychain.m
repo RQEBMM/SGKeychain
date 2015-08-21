@@ -48,7 +48,12 @@
     }
     
     NSError *persistError = nil;
-    [item saveChanges:&persistError];
+    BOOL itemSaved = [item saveChanges:&persistError];
+    
+    if (!itemSaved && !persistError)
+    {
+        persistError = [self unknownError];
+    }
     
     if (handler != nil)
     {
@@ -66,6 +71,24 @@
 {
     NSError *populateError = nil;
     [item populatePasswordField:&populateError];
+    
+    // early return with error if we fail a fetch attempt
+    if ((handler != nil) && (populateError))
+    {
+        handler(populateError);
+        return;
+    }
+    
+    // early return with error if we fail a fetch attempt
+    [item populateAttributesField:&populateError];
+    
+    if ((handler != nil) && (populateError))
+    {
+        handler(populateError);
+        return;
+    }
+    
+    [item populatePersistentReferenceField:&populateError];
     
     if (handler != nil)
     {
@@ -140,6 +163,11 @@
 + (NSError *)missingDataError
 {
     return [NSError errorWithDomain:SGKeychainErrorDomain code:SGKeychainRequiredValueNotPresentError userInfo:nil];
+}
+
++ (NSError *)unknownError
+{
+    return [NSError errorWithDomain:SGKeychainErrorDomain code:SGKeychainUnknownError userInfo:nil];
 }
 
 @end

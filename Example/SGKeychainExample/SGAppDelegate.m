@@ -39,6 +39,8 @@
         if (error == nil)
         {
             NSLog(@"Fetched password = %@", item.secret);
+            NSLog(@"Fetched password attributes = %@", item.attributes);
+            NSLog(@"Fetched password reference = %@", item.persistentRef);
         }
         else
         {
@@ -50,6 +52,7 @@
     // Delete the password
     NSError *deletePasswordError = nil;
     [SGKeychain deleteKeychainItem:item completionHandler:^(NSError *error) {
+        
         if (error == nil)
         {
             NSLog(@"Password successfully deleted");
